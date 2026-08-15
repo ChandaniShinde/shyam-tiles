@@ -260,9 +260,20 @@ function Header({ dark, toggleDark }: { dark: boolean; toggleDark: () => void })
                 <a href={`tel:${PHONE}`} className="flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground">
                   <Phone className="h-4 w-4" /> Call
                 </a>
-                <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(WA_MESSAGE)}`} className="flex items-center justify-center gap-2 rounded-full bg-gradient-gold px-4 py-2.5 text-sm font-medium text-primary">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp
-                </a>
+                    <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(WA_MESSAGE)}`} className="flex items-center justify-center gap-2 rounded-full bg-gradient-gold px-4 py-2.5 text-sm font-medium text-primary">
+                      <MessageCircle className="h-4 w-4" /> WhatsApp
+                    </a>
+                  </div>
+
+                  <div className="mt-4">
+                    <button
+                      onClick={() => toggleDark()}
+                      aria-label={dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                      className="w-full flex items-center justify-center gap-3 rounded-full border border-border bg-card px-4 py-3 text-sm font-medium text-foreground hover:bg-accent/6"
+                    >
+                      <span className="text-lg">{dark ? "☀️" : "🌙"}</span>
+                      <span>{dark ? "Light Mode" : "Dark Mode"}</span>
+                    </button>
               </div>
             </div>
           </motion.div>
@@ -875,8 +886,22 @@ function FloatingActions() {
 
 function Index() {
   const [dark, setDark] = useState(false);
+  // Initialise theme from localStorage on client mount
+  useEffect(() => {
+    try {
+      const saved = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
+      if (saved) setDark(saved === "dark");
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
+  // Apply theme class and persist preference
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    } catch (e) {}
   }, [dark]);
   return (
     <div className="min-h-screen bg-background text-foreground">

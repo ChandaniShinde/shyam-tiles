@@ -58,17 +58,17 @@
 
   --primary: var(--ink);
   --primary-foreground: oklch(0.98 0.003 250);
-  --primary-foreground-muted: oklch(0.84 0.02 250);
+  --primary-foreground-muted: oklch(0.26 0.02 250);
   /* Hero / spotlight text in Light Mode should be dark for good contrast */
   --hero-foreground: var(--foreground);
   /* Slightly muted hero copy for Light Mode */
-  --hero-muted: oklch(0.36 0.02 260);
+  --hero-muted: oklch(0.28 0.02 260);
 
   --secondary: var(--brand-blue);
   --secondary-foreground: oklch(1 0 0);
 
   --muted: oklch(0.96 0.008 250);
-  --muted-foreground: oklch(0.48 0.03 258);
+  --muted-foreground: oklch(0.28 0.03 258);
 
   --accent: var(--gold);
   --accent-foreground: var(--ink);
