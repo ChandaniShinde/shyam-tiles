@@ -1,0 +1,198 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Poppins", "Inter", sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Brand palette */
+  --ink: oklch(0.21 0.04 265);
+  --gold: oklch(0.79 0.15 78);
+  --gold-soft: oklch(0.92 0.08 85);
+  --brand-blue: oklch(0.55 0.22 260);
+
+  --background: oklch(0.99 0.004 250);
+  --foreground: oklch(0.14 0.02 255);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+
+  --primary: var(--ink);
+  --primary-foreground: oklch(0.98 0.003 250);
+  --primary-foreground-muted: oklch(0.84 0.02 250);
+  --hero-foreground: oklch(0.99 0.004 250);
+  --hero-muted: oklch(0.88 0.02 250);
+
+  --secondary: var(--brand-blue);
+  --secondary-foreground: oklch(1 0 0);
+
+  --muted: oklch(0.96 0.008 250);
+  --muted-foreground: oklch(0.48 0.03 258);
+
+  --accent: var(--gold);
+  --accent-foreground: var(--ink);
+
+  --destructive: oklch(0.58 0.24 27);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.91 0.012 258);
+  --input: oklch(0.91 0.012 258);
+  --ring: var(--gold);
+  --overlay: oklch(0.04 0.01 240 / 0.72);
+  --brand-whatsapp: oklch(0.62 0.2 147);
+
+  --gradient-hero: linear-gradient(135deg, oklch(0.21 0.04 265 / 0.86) 0%, oklch(0.21 0.04 265 / 0.6) 60%, oklch(0.21 0.04 265 / 0.35) 100%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.16 82) 0%, oklch(0.72 0.17 65) 100%);
+  --gradient-soft: linear-gradient(180deg, oklch(0.99 0.005 85) 0%, oklch(0.96 0.02 85) 100%);
+
+  --shadow-soft: 0 10px 40px -12px oklch(0.21 0.04 265 / 0.15);
+  --shadow-elegant: 0 30px 80px -20px oklch(0.21 0.04 265 / 0.25);
+  --shadow-gold: 0 20px 60px -15px oklch(0.79 0.15 78 / 0.4);
+}
+
+.dark {
+  --background: oklch(0.08 0.03 255);
+  --foreground: oklch(0.96 0.006 250);
+  --card: oklch(0.13 0.03 255);
+  --card-foreground: oklch(0.96 0.006 250);
+  --popover: oklch(0.13 0.03 255);
+  --popover-foreground: oklch(0.96 0.006 250);
+  --primary: oklch(0.98 0.006 250);
+  --primary-foreground: oklch(0.08 0.03 255);
+  --primary-foreground-muted: oklch(0.31 0.03 255);
+  --hero-foreground: oklch(0.99 0.004 250);
+  --hero-muted: oklch(0.87 0.02 250);
+  --secondary: oklch(0.68 0.16 242);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.17 0.03 255);
+  --muted-foreground: oklch(0.77 0.03 250);
+  --accent: oklch(0.82 0.16 82);
+  --accent-foreground: oklch(0.09 0.03 255);
+  --border: oklch(1 0 0 / 0.16);
+  --input: oklch(1 0 0 / 0.14);
+  --ring: oklch(0.82 0.16 82);
+  --overlay: oklch(0.03 0.01 240 / 0.8);
+  --brand-whatsapp: oklch(0.62 0.2 147);
+  --gradient-soft: linear-gradient(180deg, oklch(0.12 0.03 255) 0%, oklch(0.16 0.03 255) 100%);
+  --gradient-hero: linear-gradient(135deg, oklch(0.03 0.02 255 / 0.95) 0%, oklch(0.1 0.03 255 / 0.75) 60%, oklch(0.14 0.03 255 / 0.55) 100%);
+  --shadow-soft: 0 18px 50px -14px oklch(0 0 0 / 0.45);
+  --shadow-elegant: 0 30px 80px -20px oklch(0 0 0 / 0.6);
+  --shadow-gold: 0 20px 60px -15px oklch(0.82 0.16 82 / 0.3);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--card) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--border) 90%, transparent);
+  color: var(--foreground);
+}
+
+@utility glass-dark {
+  background: color-mix(in oklab, var(--primary) 12%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--border) 90%, transparent);
+  color: var(--foreground);
+}
+
+@utility bg-overlay {
+  background-color: var(--overlay);
+}
+
+@utility text-hero-foreground {
+  color: var(--hero-foreground);
+}
+
+@utility text-hero-muted {
+  color: var(--hero-muted);
+}
+
+@utility text-primary-foreground-muted {
+  color: var(--primary-foreground-muted);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+@utility shadow-elegant {
+  box-shadow: var(--shadow-elegant);
+}
+@utility shadow-gold {
+  box-shadow: var(--shadow-gold);
+}
+@utility bg-gradient-gold {
+  background-image: var(--gradient-gold);
+}
+@utility text-gradient-gold {
+  background-image: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility hover-lift {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-elegant);
+  }
+}
