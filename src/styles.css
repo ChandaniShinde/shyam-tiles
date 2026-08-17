@@ -198,3 +198,97 @@
     box-shadow: var(--shadow-elegant);
   }
 }
+
+.site-footer {
+  --footer-bg: var(--card);
+  --footer-text: var(--foreground);
+  --footer-muted: oklch(0.32 0.03 258);
+  --footer-border: oklch(0.86 0.012 258);
+  --footer-link: var(--foreground);
+  --footer-accent: var(--gold);
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.site-footer .footer-label,
+.site-footer .footer-copy,
+.site-footer .footer-item,
+.site-footer p,
+.site-footer li,
+.site-footer .footer-link,
+.site-footer .text-primary-foreground-muted {
+  color: var(--footer-muted);
+}
+
+.site-footer .footer-label,
+.site-footer .footer-copy {
+  color: var(--footer-text);
+}
+
+.site-footer a {
+  text-decoration: none;
+  color: var(--footer-link);
+}
+
+.site-footer .footer-link {
+  color: var(--footer-link);
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible,
+.site-footer .footer-link:hover,
+.site-footer .footer-link:focus-visible {
+  color: var(--footer-accent);
+}
+
+.site-footer svg {
+  color: inherit;
+}
+
+.site-footer .border-primary-foreground\/10,
+.site-footer .border-t {
+  border-color: var(--footer-border);
+}
+
+.dark .site-footer {
+  --footer-bg: var(--primary);
+  --footer-text: var(--primary-foreground);
+  --footer-muted: var(--primary-foreground-muted);
+  --footer-border: oklch(1 0 0 / 0.14);
+  --footer-link: var(--primary-foreground);
+  --footer-accent: var(--accent);
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.dark .site-footer .footer-label,
+.dark .site-footer .footer-copy,
+.dark .site-footer .footer-item,
+.dark .site-footer p,
+.dark .site-footer li,
+.dark .site-footer .footer-link,
+.dark .site-footer .text-primary-foreground-muted {
+  color: var(--footer-muted);
+}
+
+.dark .site-footer .footer-label,
+.dark .site-footer .footer-copy {
+  color: var(--footer-text);
+}
+
+.dark .site-footer a,
+.dark .site-footer .footer-link {
+  color: var(--footer-link);
+}
+
+.dark .site-footer a:hover,
+.dark .site-footer a:focus-visible,
+.dark .site-footer .footer-link:hover,
+.dark .site-footer .footer-link:focus-visible {
+  color: var(--footer-accent);
+}
+
+.dark .site-footer .border-primary-foreground\/10,
+.dark .site-footer .border-t {
+  border-color: var(--footer-border);
+}

@@ -26,6 +26,7 @@ import {
 
 import hero from "@/assets/paving-hero.svg";
 import logoImage from "@/assets/jd/d30cc59d-fa85-4e59-b493-e55c0e9ae31a.png";
+
 import jd1 from "@/assets/jd/1zwjdxh.jpg";
 import jd2 from "@/assets/jd/42pft5e.jpg";
 import jd3 from "@/assets/jd/2wf4n8x.jpg";
@@ -34,6 +35,11 @@ import jd5 from "@/assets/jd/2on93mq.jpg";
 import jd6 from "@/assets/jd/1xkxmzp.jpg";
 import jd7 from "@/assets/jd/3o721en.jpg";
 import jd8 from "@/assets/jd/1vbzoo1ltd.jpg";
+
+import jdNew1 from "@/assets/jd/1.jpeg";
+import jdNew2 from "@/assets/jd/2.jpeg";
+import jdNew3 from "@/assets/jd/3.jpeg";
+import jdNew4 from "@/assets/jd/4.jpeg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -70,6 +76,14 @@ const categories = [
   { icon: ShieldCheck, name: "Kerb Stones", desc: "Precision-finished edging that strengthens pavements and improves site presentation.", img: jd4 },
   { icon: Package, name: "Concrete Blocks / Cement Blocks (Vit)", desc: "Reliable masonry blocks for boundary walls, retaining structures and fast construction.", img: jd7 },
   { icon: HomeIcon, name: "Interlocking Pavers", desc: "Flexible surface solutions for plazas, courtyards, industrial yards and landscaping.", img: jd8 },
+];
+
+const existingGallery = [jd1, jd2, jd3, jd4, jd5, jd6, jd7, jd8];
+const additionalGallery = [
+  { src: jdNew1, title: "Covered parking and paved outdoor area", alt: "Covered car parking area with patterned paving tiles and pergola structure at a Shyam Tiles project site" },
+  { src: jdNew2, title: "Checkered driveway paving", alt: "Modern driveway paving with decorative checkered interlocking tiles at a residential property" },
+  { src: jdNew3, title: "Front garden pathway", alt: "Outdoor pathway and paving layout around a home entrance with patterned concrete paver blocks" },
+  { src: jdNew4, title: "Stock of concrete paver tiles", alt: "Close-up of red concrete paving tiles stacked for a project and laid out in a building compound" },
 ];
 
 const projectTypes = [
@@ -438,6 +452,7 @@ function Products() {
                   src={c.img}
                   alt={c.name}
                   loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent" />
@@ -524,11 +539,9 @@ function WhyUs() {
 }
 
 function Gallery() {
-  const imgs = [jd1, jd2, jd3, jd4, jd5, jd6, jd7, jd8];
-  const [lightbox, setLightbox] = useState<string | null>(null);
-  const spans = [
-    "row-span-2", "", "", "row-span-2", "", "", "", "",
-  ];
+  const galleryImages = [...existingGallery.map((src) => ({ src, title: "Shyam Tiles project image", alt: "Shyam Tiles paving material and construction project detail" })), ...additionalGallery];
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const spans = ["row-span-2", "", "", "row-span-2", "", "", "", "", "", "", "", ""];
   return (
     <section id="gallery" className="py-24 lg:py-32" style={{ background: "var(--gradient-soft)" }}>
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
@@ -538,23 +551,28 @@ function Gallery() {
           sub="Material finishes and site-ready surfaces that support durable construction."
         />
         <div className="mt-14 grid auto-rows-[180px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          {imgs.map((src, i) => (
+          {galleryImages.map((item, i) => (
             <motion.button
-              key={src}
-              onClick={() => setLightbox(src)}
+              key={`${item.src}-${i}`}
+              onClick={() => setLightbox({ src: item.src, alt: item.alt })}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: (i % 4) * 0.06 }}
               className={`group relative overflow-hidden rounded-2xl bg-muted shadow-soft ${spans[i] ?? ""}`}
+              aria-label={`Open larger view of ${item.title}`}
             >
               <img
-                src={src}
+                src={item.src}
                 loading="lazy"
-                alt={`Shyam Tiles paving material photo ${i + 1}`}
+                decoding="async"
+                alt={item.alt}
                 className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-primary/0 transition group-hover:bg-primary/30" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/70 to-transparent px-3 pb-3 pt-8 text-left text-xs font-medium text-primary-foreground sm:text-sm">
+                {item.title}
+              </div>
             </motion.button>
           ))}
         </div>
@@ -573,14 +591,17 @@ function Gallery() {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              src={lightbox}
-              alt="Shyam Tiles paving materials"
+              src={lightbox.src}
+              alt={lightbox.alt}
               className="max-h-[90vh] max-w-[95vw] rounded-2xl object-contain shadow-elegant"
             />
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-primary/80 px-4 py-2 text-sm text-primary-foreground backdrop-blur-sm">
+              {lightbox.alt}
+            </div>
             <button
               onClick={() => setLightbox(null)}
               className="absolute right-6 top-6 grid h-11 w-11 place-items-center rounded-full glass text-hero-foreground"
-              aria-label="Close"
+              aria-label="Close image preview"
             >
               <X className="h-5 w-5" />
             </button>
@@ -780,7 +801,7 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="text-primary-foreground" style={{ background: "var(--primary)" }}>
+    <footer className="site-footer">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-4 lg:px-8">
         <div>
           <div className="flex items-center">
@@ -792,31 +813,31 @@ function Footer() {
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary-foreground-muted">Quick Links</div>
+          <div className="footer-label text-xs font-semibold uppercase tracking-widest">Quick Links</div>
           <ul className="mt-4 space-y-2 text-sm">
             {nav.slice(0, 5).map((n) => (
               <li key={n.href}>
-                <a href={n.href} className="text-primary-foreground-muted transition hover:text-accent">{n.label}</a>
+                <a href={n.href} className="footer-link transition">{n.label}</a>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary-foreground-muted">Products</div>
+          <div className="footer-label text-xs font-semibold uppercase tracking-widest">Products</div>
           <ul className="mt-4 space-y-2 text-sm">
             {categories.slice(0, 6).map((c) => (
-              <li key={c.name} className="text-primary-foreground-muted">{c.name}</li>
+              <li key={c.name} className="footer-item">{c.name}</li>
             ))}
           </ul>
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-widest text-primary-foreground-muted">Contact</div>
-          <ul className="mt-4 space-y-2 text-sm text-primary-foreground-muted">
-            <li className="flex gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> {ADDRESS}</li>
-            <li className="flex gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0" /> +91 97660 00008</li>
-            <li className="flex gap-2"><Clock className="mt-0.5 h-4 w-4 shrink-0" /> Mon–Sat · 9:30 AM – 8:30 PM</li>
+          <div className="footer-label text-xs font-semibold uppercase tracking-widest">Contact</div>
+          <ul className="mt-4 space-y-2 text-sm">
+            <li className="footer-item flex gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> {ADDRESS}</li>
+            <li className="footer-item flex gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0" /> +91 97660 00008</li>
+            <li className="footer-item flex gap-2"><Clock className="mt-0.5 h-4 w-4 shrink-0" /> Mon–Sat · 9:30 AM – 8:30 PM</li>
           </ul>
           <div className="mt-4 overflow-hidden rounded-2xl border border-primary-foreground/10">
             <iframe
@@ -829,9 +850,9 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-primary-foreground/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-6 text-xs text-primary-foreground-muted sm:flex-row lg:px-8">
-          <div>© {new Date().getFullYear()} Shyam Tiles, Nanded. All rights reserved.</div>
-          <div>Crafted for dependable paving and construction outcomes.</div>
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-6 text-xs sm:flex-row lg:px-8">
+          <div className="footer-copy">© {new Date().getFullYear()} Shyam Tiles, Nanded. All rights reserved.</div>
+          <div className="footer-copy">Crafted for dependable paving and construction outcomes.</div>
         </div>
       </div>
     </footer>
